@@ -3,11 +3,20 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $this->view('home/index');
+        $product = new Product();
+
+        $clothing = $product->getByCategory(1);
+        $food = $product->getByCategory(2);
+
+        $this->view('home/index', [
+            'clothing' => $clothing,
+            'food' => $food
+        ]);
     }
 }

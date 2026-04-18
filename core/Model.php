@@ -18,7 +18,7 @@ class Model
                 DB_PASS
             );
 
-            //             With $this->db we can:
+            // With $this->db we can:
 
             // SELECT → get data from database
             // INSERT → add new data

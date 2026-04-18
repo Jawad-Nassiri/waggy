@@ -34,4 +34,49 @@ setInterval(() => {
 }, 3000)
 
 
+// hoodies slider
 
+const sliderElem = document.querySelector('.products-slider');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const productCards = document.querySelectorAll('.product-card');
+
+
+let productCardWidth = document.querySelector('.product-card').offsetWidth + 20;
+let totalItems = productCards.length;
+let visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+let maxIndex = totalItems - visibleItems;
+let currentIndex = 0;
+
+window.addEventListener('resize', function () {
+    productCardWidth = document.querySelector('.product-card').offsetWidth + 20;
+    visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+    maxIndex = totalItems - visibleItems;
+});
+
+
+nextBtn.addEventListener('click', () => {
+    currentIndex++;
+
+    if (currentIndex > maxIndex) {
+        currentIndex = 0;
+        sliderElem.scrollLeft = 0;
+    } else {
+        sliderElem.scrollLeft = productCardWidth * currentIndex;
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    currentIndex--;
+
+    if (currentIndex < 0) {
+        currentIndex = maxIndex;
+        sliderElem.scrollLeft = productCardWidth * maxIndex;
+    } else {
+        sliderElem.scrollLeft = productCardWidth * currentIndex;
+    }
+});
+
+sliderElem.addEventListener('scroll', () => {
+    currentIndex = Math.round(sliderElem.scrollLeft / productCardWidth);
+});
