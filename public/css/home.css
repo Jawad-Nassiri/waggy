@@ -167,7 +167,6 @@
   display: flex;
   gap: 20px;
   scroll-behavior: smooth;
-  cursor: grab;
 }
 
 .products-slider::-webkit-scrollbar {
@@ -258,4 +257,22 @@
 .btn-cart:hover {
   background: #41403e;
   color: white;
+}
+
+
+/* food section  */
+
+.products-section.food {
+  max-width: 1300px;
+  margin-top: 150px;
+}
+
+.products-header.food {
+  padding: 0 5px;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px 20px;
 }

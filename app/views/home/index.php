@@ -95,7 +95,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <!-- categories finish  -->
 
 <!-- hoodies start  -->
-<section class="products-section">
+<section class="products-section hoodie">
     <div class="products-header">
         <h2>Pet Clothing</h2>
         <a href="#" class="btn-shop">SHOP NOW →</a>
@@ -126,6 +126,32 @@ require_once __DIR__ . '/../layouts/header.php';
     </div>
 </section>
 <!-- hoodies finish  -->
+
+<!-- foods start  -->
+<section class="products-section food">
+    <div class="products-header food">
+        <h2>Pet Foodies</h2>
+        <a href="#" class="btn-shop">SHOP NOW →</a>
+    </div>
+
+    <div class="food-grid">
+        <?php foreach ($food as $product): ?>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/waggy/public/images/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                </div>
+                <h3><?= $product['name'] ?></h3>
+                <div class="product-stars">
+                    <span>★★★★★</span> 5.0
+                </div>
+                <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
+                <button class="btn-cart">ADD TO CART</button>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+<!-- foods finish  -->
+
 
 
 
