@@ -44,13 +44,15 @@ const productCards = document.querySelectorAll('.product-card');
 
 let productCardWidth = document.querySelector('.product-card').offsetWidth + 20;
 let totalItems = productCards.length;
-let visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+// let visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+let visibleItems = Math.floor(sliderElem.offsetWidth / productCardWidth);
 let maxIndex = totalItems - visibleItems;
 let currentIndex = 0;
 
 window.addEventListener('resize', function () {
     productCardWidth = document.querySelector('.product-card').offsetWidth + 20;
-    visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+    // visibleItems = Math.round(sliderElem.offsetWidth / productCardWidth);
+    visibleItems = Math.floor(sliderElem.offsetWidth / productCardWidth);
     maxIndex = totalItems - visibleItems;
 });
 
