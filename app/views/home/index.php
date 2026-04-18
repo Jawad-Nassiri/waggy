@@ -152,6 +152,19 @@ require_once __DIR__ . '/../layouts/header.php';
 </section>
 <!-- foods finish  -->
 
+<!-- sale-banner start  -->
+<section class="sale-banner">
+    <div class="sale-content">
+        <span>UPTO 40% OFF</span>
+        <h2>Clearance<br>Sale !!!</h2>
+        <a href="#" class="btn-shop">SHOP NOW →</a>
+    </div>
+    <div class="sale-image">
+        <img src="/waggy/public/images/banner/banner-img4.png" alt="Sale">
+    </div>
+</section>
+<!-- sale-banner finish  -->
+
 
 
 
