@@ -165,6 +165,47 @@ require_once __DIR__ . '/../layouts/header.php';
 </section>
 <!-- sale-banner finish  -->
 
+<!-- blog start  -->
+<section class="blog-section">
+    <div class="blog-header">
+        <h2>Latest Blog Post</h2>
+        <a href="#" class="btn-shop">READ ALL →</a>
+    </div>
+
+    <div class="blog-grid">
+        <div class="blog-card">
+            <div class="blog-image1">
+                <span class="blog-date"><strong>20</strong> Feb</span>
+                <img src="/waggy/public/images/blog/blog1.jpg" alt="Blog 1">
+            </div>
+            <h3>10 Reasons To Be Helpful Towards Any Animals</h3>
+            <p>At the core of our practice is the idea that cities are the incubators of our greatest achievements, and the best hope for a sustainable future.</p>
+            <a href="#" class="read-more">READ MORE</a>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-image2">
+                <span class="blog-date"><strong>21</strong> Feb</span>
+                <img src="/waggy/public/images/blog/blog2.jpg" alt="Blog 2">
+            </div>
+            <h3>How To Know Your Pet Is Hungry</h3>
+            <p>At the core of our practice is the idea that cities are the incubators of our greatest achievements, and the best hope for a sustainable future.</p>
+            <a href="#" class="read-more">READ MORE</a>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-image3">
+                <span class="blog-date"><strong>22</strong> Feb</span>
+                <img src="/waggy/public/images/blog/blog3.jpg" alt="Blog 3">
+            </div>
+            <h3>Best Home For Your Pets</h3>
+            <p>At the core of our practice is the idea that cities are the incubators of our greatest achievements, and the best hope for a sustainable future.</p>
+            <a href="#" class="read-more">READ MORE</a>
+        </div>
+    </div>
+</section>
+<!-- blog finish  -->
+
 
 
 
