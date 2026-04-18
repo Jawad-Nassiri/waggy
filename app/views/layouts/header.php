@@ -8,7 +8,12 @@
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/waggy/public/css/main.css" />
+
+    <?php if (isset($pageStyles)): ?>
+        <link rel="stylesheet" href="/waggy/public/css/<?= $pageStyles ?>.css" />
+    <?php endif; ?>
+
 </head>
 
 <body>
@@ -16,7 +21,7 @@
     <header class="top-header">
         <div class="header-container">
             <div class="logo">
-                <img src="logo.png" />
+                <img src="/waggy/public/images/logo.png" alt="Logo">
             </div>
             <div class="search-bar">
                 <input

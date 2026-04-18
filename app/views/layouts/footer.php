@@ -3,7 +3,7 @@
 
         <div class="footer-brand">
             <div class="logo">
-                <img src="logo.png" alt="Logo">
+                <img src="/waggy/public/images/logo.png" alt="Logo">
             </div>
             <p>Subscribe to our newsletter to get updates about our grand offers.</p>
             <div class="social-icons">
@@ -54,6 +54,11 @@
     </div>
 </footer>
 
+
+<!-- home.js file  -->
+<?php if (isset($pageScripts)): ?>
+        <script src="/waggy/public/js/<?= $pageScripts ?>.js"></script>
+    <?php endif; ?>
 </body>
 
 </html>
