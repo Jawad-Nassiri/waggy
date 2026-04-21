@@ -12,7 +12,7 @@ class HomeController extends Controller
         $product = new Product();
 
         $clothing = $product->getByCategory(1);
-        $food = $product->getByCategory(2);
+        $food = $product->getByCategory(2, 8, 0);
 
         $this->view('home/index', [
             'clothing' => $clothing,
