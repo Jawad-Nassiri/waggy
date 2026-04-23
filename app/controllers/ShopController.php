@@ -89,8 +89,7 @@ class ShopController extends Controller
         echo json_encode([
             'products' => $products,
             'totalPages' => $totalPages,
-            'totalProducts' => $total,
-            'totalPages' => $totalPages
+            'totalProducts' => $total
         ]);
     }
 }

@@ -5,6 +5,10 @@
   font-family: Arial, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* header start  */
 .top-header {
   height: 125px;

@@ -11,7 +11,7 @@ class Router
 
         $controllerName = ucfirst($url[0] ?? 'home') . 'Controller';
         $method = strtolower($url[1] ?? 'index');
-
+        $param = $url[2] ?? null;
 
         $class = "\\App\\Controllers\\$controllerName";
 
@@ -25,6 +25,6 @@ class Router
             die("Method not found");
         }
 
-        $controller->$method();
+        $controller->$method($param);
     }
 }

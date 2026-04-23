@@ -8,12 +8,13 @@ use PDO;
 class Product extends Model
 {
 
-public function countAll() {
-    $stmt = $this->db->prepare('SELECT COUNT(*) FROM products');
-    $stmt->execute();
+    public function countAll()
+    {
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM products');
+        $stmt->execute();
 
-    return $stmt->fetchColumn();
-}
+        return $stmt->fetchColumn();
+    }
 
     public function getByCategory($categoryId, $limit = null, $offset = null)
     {
@@ -35,8 +36,6 @@ public function countAll() {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
 
     public function getFiltered($limit, $offset, $categoryId = null, $minPrice = null, $maxPrice = null)
     {
@@ -69,7 +68,6 @@ public function countAll() {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function countFiltered($categoryId = null, $minPrice = null, $maxPrice = null)
     {
         $sql = "SELECT COUNT(*) FROM products WHERE 1=1";
@@ -91,4 +89,14 @@ public function countAll() {
 
         return $stmt->fetchColumn();
     }
+
+    public function getProductById($id) {
+        $stmt = $this->db->prepare('SELECT * FROM products WHERE id = :id');
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
+
+

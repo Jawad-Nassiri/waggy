@@ -15,7 +15,6 @@ const priceFilterLinks = priceListElem.querySelectorAll('a');
 let categoryId = null;
 let price = null;
 let currentPage = 1;
-paginationLinks[currentPage - 1].classList.add('active');
 
 function handleFilterClick(event, type) {
 
@@ -70,21 +69,29 @@ async function fetchProducts() {
     resultsCountElem.textContent = `Showing ${products.length} out of ${totalProducts}`;
 
     products.forEach(product => {
-        let { image, name, price } = product;
+        let { id, image, name, price } = product;
+let star = '';
+    let randomNum = Math.floor(Math.random() * 4) + 2;
+
+    for (let i = 1; i <= randomNum; i++) {
+        star += '★';
+    }
 
         productsContainer.insertAdjacentHTML('beforeend',
             `
+            <a class="product-card-link" href="/waggy/product/index/${id}">
                 <div class="product-card">
                     <div class="product-image">
                         <img src="/waggy/public/images/${image}" alt="${name}">
                     </div>
                     <h3>${name}</h3>
                     <div class="product-stars">
-                        <span>★★★★★</span> 5.0
+                        ${star} ${randomNum}.0
                     </div>
                     <p class="product-price">$${parseFloat(price).toFixed(2)}</p>
                     <button class="btn-cart">ADD TO CART</button>
                 </div>
+                </a>
             
             `
         )
@@ -92,21 +99,11 @@ async function fetchProducts() {
 
 };
 
-const highlightPaginationLink = (arr) => {
-    arr.forEach(el => {
-        el.addEventListener('click', () => {
-            arr.forEach(el => el.classList.remove('active'));
-            el.classList.add('active');
-            document.documentElement.scrollTop = 200;
-        })
-    });
-}
-
 function renderPagination(totalPages) {
     if (totalPages <= 1) return;
 
     if (currentPage > 1) {
-        paginationContainerElem.insertAdjacentHTML('beforeend', 
+        paginationContainerElem.insertAdjacentHTML('beforeend',
             `<a href="#" class="pagination-link arrow-left" data-page="${currentPage - 1}">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>`
@@ -114,13 +111,13 @@ function renderPagination(totalPages) {
     }
 
     for (let i = 1; i <= totalPages; i++) {
-        paginationContainerElem.insertAdjacentHTML('beforeend', 
+        paginationContainerElem.insertAdjacentHTML('beforeend',
             `<a href="#" class="pagination-link num ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`
         );
     }
 
     if (currentPage < totalPages) {
-        paginationContainerElem.insertAdjacentHTML('beforeend', 
+        paginationContainerElem.insertAdjacentHTML('beforeend',
             `<a href="#" class="pagination-link arrow-right" data-page="${currentPage + 1}">
                 <i class="fa-solid fa-arrow-right"></i>
             </a>`
@@ -131,17 +128,8 @@ function renderPagination(totalPages) {
 highlightClickedElem(categoryFilterLinks);
 highlightClickedElem(priceFilterLinks);
 
-highlightPaginationLink(paginationLinks);
-
 
 categoryListElem.addEventListener('click', (e) => handleFilterClick(e, 'category'));
 priceListElem.addEventListener('click', (e) => handleFilterClick(e, 'price'));
 paginationContainerElem.addEventListener('click', (e) => handleFilterClick(e, 'page'));
-
-
-
-
-
-
-
 

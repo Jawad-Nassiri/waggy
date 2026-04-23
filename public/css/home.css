@@ -1,3 +1,5 @@
+@import 'gallery.css';
+
 /* banner slider section */
 
 .hero-slider {
@@ -430,20 +432,4 @@
 .read-more:hover {
   color: #dead6f;
   border-color: #dead6f;
-}
-
-/* gallery section  */
-
-.gallery {
-  display: flex;
-  gap: 10px;
-  padding: 0 20px;
-  margin: 60px 0;
-}
-
-.gallery img {
-  width: calc(100% / 6);
-  height: 295;
-  object-fit: cover;
-  border-radius: 12px;
 }
