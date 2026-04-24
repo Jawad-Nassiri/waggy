@@ -1,36 +1,6 @@
 @import "home.css";
+@import "banner.css";
 
-/* shop banner  */
-
-#banner {
-  height: 320px;
-  background: #f9f3ec;
-  padding: 50px;
-}
-
-.container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 25px;
-}
-
-.title {
-  color: #41403e;
-  font-size: 80px;
-  font-family: "Chilanka", cursive;
-  margin-bottom: 5px;
-  font-weight: 100;
-}
-
-.breadcrumb-item {
-  font-size: 18px;
-  font-family: "Chilanka", cursive;
-}
-
-.breadcrumb-item:not(:first-child)::before {
-  content: "/";
-  margin: 0 5px;
-}
 
 /* shop container */
 .shop-container {
