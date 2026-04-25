@@ -13,7 +13,6 @@ const icons = {
     error: '<i class="fa-solid fa-circle-exclamation" style="color:#e74c3c"></i>',
 };
 
-
 function showToast(type = 'info', title = '', message = '', duration = 3000) {
     const container = document.querySelector('#toast-container');
 
@@ -22,15 +21,14 @@ function showToast(type = 'info', title = '', message = '', duration = 3000) {
 
     toast.innerHTML = `
         <div class="toast-icon">${icons[type]}</div>
-        <div class="toast-body">
-            <div class="toast-title">${title}</div>
-            <div class="toast-message">${message}</div>
-        </div>
+            <div class="toast-body">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
         <button class="toast-close">✕</button>
     `;
 
     container.appendChild(toast);
-
 
     toast.querySelector('.toast-close').addEventListener('click', () => dismissToast(toast));
 
@@ -42,10 +40,13 @@ function dismissToast(toast) {
     setTimeout(() => toast.remove(), 500);
 }
 
-
-
 if (window.toastData) {
+
     let { type, message } = window.toastData;
-    showToast(type, type.toUpperCase(), message, 2000);
+
+    if (!document.querySelector('.toast')) {
+        showToast(type, type.toUpperCase(), message, 2000);
+    }
+
 }
 

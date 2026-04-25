@@ -27,7 +27,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
     <div class="auth-divider"></div>
 
-    <form action="/waggy/auth/register" method="POST" class="auth-form">
+    <form action="/waggy/auth/register" method="POST" class="auth-form" id="auth-form">
 
         <div class="auth-section-line"></div>
 

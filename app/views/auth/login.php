@@ -24,9 +24,8 @@ require_once __DIR__ . '/../layouts/header.php';
         <a href="/waggy/auth/register" class="auth-tab">SIGN UP</a>
     </div>
 
-    <div class="auth-divider"></div>
 
-    <form action="/waggy/auth/login" method="POST" class="auth-form">
+    <form action="/waggy/auth/login" method="POST" class="auth-form" id="login-form">
 
         <div class="form-group">
             <input type="email" id="email" name="email" placeholder="Your Email Address" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">

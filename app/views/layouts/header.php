@@ -66,3 +66,9 @@
     </nav>
     <!-- nav finish  -->
 
+<?php if (isset($_SESSION['toast'])): ?>
+    <script>
+        window.toastData = <?= json_encode($_SESSION['toast']) ?>;
+    </script>
+    <?php unset($_SESSION['toast']); ?>
+<?php endif; ?>

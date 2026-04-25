@@ -1,7 +1,6 @@
 const doc = document;
 const eyeIcons = doc.querySelectorAll('#eye-icon');
 
-
 // toggle eye icons 
 eyeIcons.forEach(eye => {
     eye.addEventListener('click', () => {
@@ -15,11 +14,12 @@ eyeIcons.forEach(eye => {
 
 
 // sign up error handling
-const authForm = doc.querySelector('.auth-form');
+const authForm = doc.querySelector('#auth-form');
 const errorNameElem = doc.querySelector('.form-error.name');
 const errorEmailElem = doc.querySelector('.form-error.email');
 const errorPasswordElem = doc.querySelector('.form-error.password');
 const errorConfirmPasswordElem = doc.querySelector('.form-error.confirm-password');
+const loginForm = doc.querySelector('#login-form');
 
 // show error\success messages 
 const showMessage = (input, errElem, message, color) => {
@@ -34,65 +34,78 @@ const clearMessage = (input, errElem) => {
     errElem.textContent = "";
 };
 
-// input fields validation 
-authForm.addEventListener('input', (event) => {
-    let input = event.target.closest('input');
-    if (!input) return;
+if (authForm) {
+    // input fields validation 
+    authForm.addEventListener('input', (event) => {
+        let input = event.target.closest('input');
+        if (!input) return;
 
-    let id = input.id;
-    let value = input.value;
+        let id = input.id;
+        let value = input.value;
 
-    if (id === "name") {
-        // validate name length
-        if (value.trim() === "") {
-            clearMessage(input, errorNameElem);
-        } else if (value.trim().length < 3) {
-            showMessage(input, errorNameElem, "Name must be at least 3 characters", "#e74c3c");
-        } else {
-            showMessage(input, errorNameElem, "Name is valid", "#28a745");
+        if (id === "name") {
+            // validate name length
+            if (value.trim() === "") {
+                clearMessage(input, errorNameElem);
+            } else if (value.trim().length < 3) {
+                showMessage(input, errorNameElem, "Name must be at least 3 characters", "#e74c3c");
+            } else {
+                showMessage(input, errorNameElem, "Name is valid", "#28a745");
+            }
         }
-    }
 
-    if (id === "email") {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (id === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // validate email format
-        if (value.trim() === "") {
-            clearMessage(input, errorEmailElem);
-        } else if (!emailRegex.test(value)) {
-            showMessage(input, errorEmailElem, "Invalid email address", "#e74c3c");
-        } else {
-            showMessage(input, errorEmailElem, "Email is valid", "#28a745");
+            // validate email format
+            if (value.trim() === "") {
+                clearMessage(input, errorEmailElem);
+            } else if (!emailRegex.test(value)) {
+                showMessage(input, errorEmailElem, "Invalid email address", "#e74c3c");
+            } else {
+                showMessage(input, errorEmailElem, "Email is valid", "#28a745");
+            }
         }
-    }
 
-    if (id === "password") {
-        // validate password length
-        if (value.trim() === "") {
-            clearMessage(input, errorPasswordElem);
-        } else if (value.trim().length < 6) {
-            showMessage(input, errorPasswordElem, "Password must be at least 6 characters", "#e74c3c");
-        } else {
-            showMessage(input, errorPasswordElem, "Password is valid", "#28a745");
+        if (id === "password") {
+            // validate password length
+            if (value.trim() === "") {
+                clearMessage(input, errorPasswordElem);
+            } else if (value.trim().length < 6) {
+                showMessage(input, errorPasswordElem, "Password must be at least 6 characters", "#e74c3c");
+            } else {
+                showMessage(input, errorPasswordElem, "Password is valid", "#28a745");
+            }
         }
-    }
 
-    if (id === "confirm-password") {
-        let passwordValue = doc.querySelector('#password').value;
+        if (id === "confirm-password") {
+            let passwordValue = doc.querySelector('#password').value;
 
-        // validate password match
-        if (value.trim() === "") {
-            clearMessage(input, errorConfirmPasswordElem);
-        } else if (value.trim() !== passwordValue.trim()) {
-            showMessage(input, errorConfirmPasswordElem, "Passwords do not match", "#e74c3c");
-        } else {
-            showMessage(input, errorConfirmPasswordElem, "Password match", "#28a745");
+            // validate password match
+            if (value.trim() === "") {
+                clearMessage(input, errorConfirmPasswordElem);
+            } else if (value.trim() !== passwordValue.trim()) {
+                showMessage(input, errorConfirmPasswordElem, "Passwords do not match", "#e74c3c");
+            } else {
+                showMessage(input, errorConfirmPasswordElem, "Password match", "#28a745");
+            }
         }
-    }
-});
+    });
 
-// form validation 
-function validateForm() {
+    // submit form if no error detected 
+    authForm.addEventListener('submit', (e) => {
+        if (!validateRegisterForm()) {
+            e.preventDefault();
+            if (!document.querySelector('.toast')) {
+                showToast('error', 'Error', 'Please fill all fields!', 2000);
+            }
+            return;
+        }
+    });
+}
+
+// register form validation 
+function validateRegisterForm() {
     let isValid = true;
 
     const name = doc.querySelector('#name').value.trim();
@@ -111,11 +124,64 @@ function validateForm() {
     return isValid;
 }
 
-// submit form if no error detected 
-authForm.addEventListener('submit', (e) => {
-    if (!validateForm()) {
-        e.preventDefault();
-        showToast('error', 'Error', 'Please fill all fields!', 2000);
-        return;
-    }
-});
+// login form validation 
+const validateLoginForm = () => {
+    let isValid = true;
+
+    const email = doc.querySelector('#email').value.trim();
+    const password = doc.querySelector('#password').value.trim();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) isValid = false;
+    if (password.length < 6) isValid = false;
+
+    return isValid;
+}
+
+if (loginForm) {
+    // input fields validation 
+    loginForm.addEventListener('input', (event) => {
+        let input = event.target.closest('input');
+        if (!input) return;
+
+        let id = input.id;
+        let value = input.value;
+
+        if (id === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (value.trim() === "") {
+                clearMessage(input, errorEmailElem);
+            } else if (!emailRegex.test(value)) {
+                showMessage(input, errorEmailElem, "Invalid email address", "#e74c3c");
+            } else {
+                showMessage(input, errorEmailElem, "Email is valid", "#28a745");
+            }
+        }
+
+        if (id === "password") {
+
+            if (value.trim() === "") {
+                clearMessage(input, errorPasswordElem);
+            } else if (value.trim().length < 6) {
+                showMessage(input, errorPasswordElem, "Password must be at least 6 characters", "#e74c3c");
+            } else {
+                showMessage(input, errorPasswordElem, "Password is valid", "#28a745");
+            }
+        }
+
+    });
+    
+    // submit login form is not error detected
+    loginForm.addEventListener('submit', (e) => {
+
+        if (!validateLoginForm()) {
+            e.preventDefault();
+            if (!document.querySelector('.toast')) {
+                showToast('error', 'Error', 'Please fill all fields!', 2000);
+            }
+            return;
+        }
+    })
+}

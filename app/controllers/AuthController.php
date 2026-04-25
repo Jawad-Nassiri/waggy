@@ -58,7 +58,6 @@ class AuthController extends Controller
             return $this->view('auth/register', [
                 'errors' => $errors
             ]);
-
         } else {
             $this->view('auth/register', ['errors' => []]);
         }
@@ -86,6 +85,8 @@ class AuthController extends Controller
                 'id' => $userData['id'],
                 'name' => $userData['name']
             ];
+
+            $_SESSION['toast'] = ['type' => 'success', 'message' => 'Welcome back, ' . $userData['name'] . '!'];
 
             header("Location: /waggy/home");
             exit;
