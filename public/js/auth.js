@@ -11,7 +11,7 @@ eyeIcons.forEach(eye => {
         eye.classList.toggle('fa-eye-slash');
         eye.classList.toggle('fa-eye');
     })
-})
+});
 
 
 // sign up error handling

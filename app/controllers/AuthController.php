@@ -51,15 +51,46 @@ class AuthController extends Controller
                 }
 
                 $_SESSION['toast'] = ['type' => 'success', 'message' => 'You Registered successfully!'];
-                header("Location: /waggy/home");
+                header("Location: /waggy/auth/login");
                 exit;
             }
 
             return $this->view('auth/register', [
                 'errors' => $errors
             ]);
+
         } else {
             $this->view('auth/register', ['errors' => []]);
+        }
+    }
+
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);
+
+            $user = new User();
+            $userData = $user->login($email, $password);
+
+
+            if (!$userData) {
+                $this->view('auth/login', [
+                    'errors' => ['login' => 'Invalid email or password']
+                ]);
+                return;
+            }
+
+            $_SESSION['user'] = [
+                'id' => $userData['id'],
+                'name' => $userData['name']
+            ];
+
+            header("Location: /waggy/home");
+            exit;
+        } else {
+            $this->view('auth/login', ['errors' => []]);
         }
     }
 }

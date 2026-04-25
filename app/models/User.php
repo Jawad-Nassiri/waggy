@@ -27,7 +27,6 @@ class User extends Model
         return $stmt->execute();
     }
 
-
     public function emailExists($email)
     {
         $stmt = $this->db->prepare('SELECT id FROM users WHERE email = :email');
@@ -40,4 +39,20 @@ class User extends Model
     }
 
 
+    public function findUserByEmail($email) {
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email');
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function login($email, $password) {
+        $user = $this->findUserByEmail($email);
+
+        if (!$user) return false;
+        if (!password_verify($password, $user['password'])) return false;
+
+        return $user;
+    }
 }
