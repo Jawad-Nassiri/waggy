@@ -10,4 +10,5 @@ tabButtons.forEach(tabBtn => {
         tabBtn.classList.add('active');
         document.getElementById(tabBtn.dataset.tab).classList.add('active');
     })
-})
+});
+

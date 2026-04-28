@@ -3,7 +3,6 @@
 $pageStyles = 'shop';
 $pageScripts = 'shop';
 require_once __DIR__ . '/../layouts/header.php';
-
 ?>
 
 <section id="banner">
@@ -82,7 +81,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <span><?= $star . " " . $num . ".0" ?></span>
                         </div>
                         <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
-                        <button class="btn-cart">ADD TO CART</button>
+                        <button class="btn-cart" data-id=<?= $product['id'] ?>>ADD TO CART</button>
                     </div>
                 </a> <?php endforeach; ?>
         </div>

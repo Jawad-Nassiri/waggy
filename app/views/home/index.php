@@ -107,17 +107,26 @@ require_once __DIR__ . '/../layouts/header.php';
         </div>
         <div class="products-slider">
             <?php foreach ($clothing as $product): ?>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="/waggy/public/images/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                <a class="product-card-link" href="/waggy/product/index/<?= $product['id'] ?>">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="/waggy/public/images/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        </div>
+                        <h3><?= $product['name'] ?></h3>
+                        <?php
+                        $randomNum = rand(2, 5);
+                        $star = '';
+                        for ($i = 1; $i <= $randomNum; $i++) {
+                            $star .= '★';
+                        };
+                        ?>
+                        <div class="product-stars">
+                            <span><?= $star . ' ' . $randomNum . '.0' ?></span>
+                        </div>
+                        <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
+                        <button class="btn-cart">ADD TO CART</button>
                     </div>
-                    <h3><?= $product['name'] ?></h3>
-                    <div class="product-stars">
-                        <span>★★★★★</span> 5.0
-                    </div>
-                    <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
-                    <button class="btn-cart">ADD TO CART</button>
-                </div>
+                </a>
             <?php endforeach; ?>
         </div>
         <div class="navigation next">
@@ -136,17 +145,27 @@ require_once __DIR__ . '/../layouts/header.php';
 
     <div class="food-grid">
         <?php foreach ($food as $product): ?>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="/waggy/public/images/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+            <a class="product-card-link" href="/waggy/product/index/<?= $product['id'] ?>">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/waggy/public/images/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                    </div>
+                    <h3><?= $product['name'] ?></h3>
+                    <?php
+                    $randomNum = rand(2, 5);
+                    $star = '';
+                    for ($i = 1; $i <= $randomNum; $i++) {
+                        $star .= '★';
+                    }
+                    ?>
+                    <div class="product-stars">
+                        <span><?= $star . ' ' . $randomNum . '.0' ?></span>
+                    </div>
+                    <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
+                    <button class="btn-cart">ADD TO CART</button>
                 </div>
-                <h3><?= $product['name'] ?></h3>
-                <div class="product-stars">
-                    <span>★★★★★</span> 5.0
-                </div>
-                <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
-                <button class="btn-cart">ADD TO CART</button>
-            </div>
+            </a>
+
         <?php endforeach; ?>
     </div>
 </section>
@@ -207,7 +226,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <!-- blog finish  -->
 
 <!-- gallery start  -->
- <section class="gallery">
+<section class="gallery">
     <img src="/waggy/public/images/gallery/gallery1.jpg" alt="">
     <img src="/waggy/public/images/gallery/gallery2.jpg" alt="">
     <img src="/waggy/public/images/gallery/gallery3.jpg" alt="">

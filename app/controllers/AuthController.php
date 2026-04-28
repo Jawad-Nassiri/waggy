@@ -6,11 +6,17 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Models\Cart;
 
 class AuthController extends Controller
 {
     public function register()
     {
+        if (isset($_SESSION['user'])) {
+            header("Location: /waggy/home");
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $errors = [];
 
@@ -65,6 +71,11 @@ class AuthController extends Controller
 
     public function login()
     {
+        if (isset($_SESSION['user'])) {
+            header("Location: /waggy/home");
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             $email = trim($_POST['email']);
@@ -86,6 +97,10 @@ class AuthController extends Controller
                 'name' => $userData['name']
             ];
 
+            $cart = new Cart();
+            $cartCount = $cart->countCartItems($_SESSION['user']['id']);
+            $_SESSION['cartCount'] = $cartCount;
+
             $_SESSION['toast'] = ['type' => 'success', 'message' => 'Welcome back, ' . $userData['name'] . '!'];
 
             header("Location: /waggy/home");
@@ -93,5 +108,12 @@ class AuthController extends Controller
         } else {
             $this->view('auth/login', ['errors' => []]);
         }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: /waggy/home");
+        exit;
     }
 }

@@ -1,3 +1,8 @@
+<?php
+$cartCount = $_SESSION['cartCount'] ?? 0;
+echo $cartCount;
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -47,28 +52,44 @@
     <nav class="main-nav">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Shop</a></li>
+                <li><a href="/waggy/home">Home</a></li>
+                <li><a href="/waggy/shop">Shop</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <i class="fa-solid fa-user"></i>
+                <?php if (isset($_SESSION['user'])): ?>
+                    <a href="#" class="user" id="user-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <div class="user-data" id="user-data">
+                        <span class="username"><?= $_SESSION['user']['name'] ?></span>
+                        <a href="/waggy/auth/logout" class="logout">Logout</a>
+                        <span class="username"></span>
+                    </div>
+                <?php else: ?>
+                    <a href="/waggy/auth/login" class="user" id="user-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                <?php endif; ?>
+
 
                 <div class="cart-wrap">
                     <a href="#" class="cart-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
-                    <span class="cart-count">3</span>
+                    <?php if ($cartCount !== 0): ?>
+                        <span class="cart-count"><?= $cartCount ?></span>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </nav>
     <!-- nav finish  -->
 
-<?php if (isset($_SESSION['toast'])): ?>
-    <script>
-        window.toastData = <?= json_encode($_SESSION['toast']) ?>;
-    </script>
-    <?php unset($_SESSION['toast']); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION['toast'])): ?>
+        <script>
+            window.toastData = <?= json_encode($_SESSION['toast']) ?>;
+        </script>
+        <?php unset($_SESSION['toast']); ?>
+    <?php endif; ?>

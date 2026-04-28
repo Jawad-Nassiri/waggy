@@ -49,4 +49,3 @@ if (window.toastData) {
     }
 
 }
-

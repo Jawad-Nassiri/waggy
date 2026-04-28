@@ -56,6 +56,7 @@
 
 
 <!-- links js files  -->
+<script src="/waggy/public/js/main.js"></script>
 <script src="/waggy/public/js/toast.js"></script>
 
 <?php if (isset($pageScripts)): ?>
