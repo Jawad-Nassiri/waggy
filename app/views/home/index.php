@@ -101,7 +101,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <a href="#" class="btn-shop">SHOP NOW →</a>
     </div>
 
-    <div class="products-slider-wrapper">
+    <div class="products-slider-wrapper" id="products-container">
         <div class="navigation prev">
             <i class="fa-solid fa-arrow-left"></i>
         </div>
@@ -124,7 +124,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <span><?= $star . ' ' . $randomNum . '.0' ?></span>
                         </div>
                         <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
-                        <button class="btn-cart">ADD TO CART</button>
+                        <button class="btn-cart" data-id=<?= $product['id'] ?>>ADD TO CART</button>
                     </div>
                 </a>
             <?php endforeach; ?>
@@ -143,7 +143,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <a href="#" class="btn-shop">SHOP NOW →</a>
     </div>
 
-    <div class="food-grid">
+    <div class="food-grid product-container">
         <?php foreach ($food as $product): ?>
             <a class="product-card-link" href="/waggy/product/index/<?= $product['id'] ?>">
                 <div class="product-card">
@@ -162,7 +162,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <span><?= $star . ' ' . $randomNum . '.0' ?></span>
                     </div>
                     <p class="product-price">$<?= number_format($product['price'], 2) ?></p>
-                    <button class="btn-cart">ADD TO CART</button>
+                    <button class="btn-cart" data-id=<?= $product['id'] ?>>ADD TO CART</button>
                 </div>
             </a>
 

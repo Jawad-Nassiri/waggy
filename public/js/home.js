@@ -4,6 +4,8 @@
 const slidersElem = document.querySelectorAll('.slide');
 const dotsBtn = document.querySelectorAll('.dot');
 const sliderDotsContainer = document.querySelector('.slider-dots');
+const productSlider = document.querySelector('.products-slider');
+const productsContainer = document.querySelector('.product-container');
 
 let current = 0;
 
@@ -80,3 +82,8 @@ prevBtn.addEventListener('click', () => {
 sliderElem.addEventListener('scroll', () => {
     currentIndex = Math.round(sliderElem.scrollLeft / productCardWidth);
 });
+
+
+// add to cart functionality 
+productSlider.addEventListener('click', e => addToCart(e));
+productsContainer.addEventListener('click', e => addToCart(e));

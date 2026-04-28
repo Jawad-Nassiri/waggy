@@ -130,47 +130,4 @@ highlightClickedElem(priceFilterLinks);
 categoryListElem.addEventListener('click', (e) => handleFilterClick(e, 'category'));
 priceListElem.addEventListener('click', (e) => handleFilterClick(e, 'price'));
 paginationContainerElem.addEventListener('click', (e) => handleFilterClick(e, 'page'));
-
-// add to cart functionality
-const addToCart = async (event) => {
-    const btn = event.target.closest('.btn-cart');
-    if (!btn) return;
-
-    event.preventDefault();
-
-    let productId = btn.dataset.id;
-    let obj = {
-        productId,
-        quantity: 1
-    }
-
-    const res = await fetch('/waggy/cart/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    });
-
-    let data = await res.json();
-    let { status, message, productCount } = data;
-
-    if (status.toLowerCase() === "success") {
-        showToast(status.toLowerCase(), status, message, 3000);
-        const cartWrap = document.querySelector('.cart-wrap');
-        let cartCount = document.querySelector('.cart-count');
-
-        if (!cartCount) {
-            cartWrap.insertAdjacentHTML('beforeend', '<span class="cart-count"></span>');
-            cartCount = document.querySelector('.cart-count');
-        }
-        cartCount.textContent = data.cartCount;
-    } else if (status.toLowerCase() === "warning") {
-        showToast(status.toLowerCase(), status, message, 3000);
-    } else {
-        showToast(status.toLowerCase(), status, message, 2000);
-        setTimeout(() => { location.pathname = '/waggy/auth/login' }, 2000);
-    }
-}
-
 productsContainer.addEventListener('click', e => addToCart(e));

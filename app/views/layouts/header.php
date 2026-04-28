@@ -1,6 +1,5 @@
 <?php
 $cartCount = $_SESSION['cartCount'] ?? 0;
-echo $cartCount;
 ?>
 
 <!doctype html>

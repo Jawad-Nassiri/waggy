@@ -47,11 +47,13 @@ require_once __DIR__ . '/../layouts/header.php';
 
         <div class="product-detail-quantity">
             <button class="qty-btn" id="qty-minus">−</button>
-            <input type="number" id="qty-input" value="1" min="1" max="<?= $product['stock'] ?>">
+            <input type="number" id="qty-input" value="1" min="1" max="<?= $product['stock'] ?>" readonly>
             <button class="qty-btn" id="qty-plus">+</button>
         </div>
 
-        <button class="btn-add-to-cart">ADD TO CART</button>
+        <button class="btn-add-to-cart btn-cart" data-id="<?= htmlspecialchars($product['id']) ?>">
+            ADD TO CART
+        </button>
         <a href="/waggy/shop" class="btn-back-to-shop">Continue Shopping</a>
 
         <div class="product-detail-meta">
