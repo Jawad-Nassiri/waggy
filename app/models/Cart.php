@@ -23,18 +23,7 @@ class Cart extends Model
         $existing = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($existing) {
-        //     $stmt = $this->db->prepare("
-        //     UPDATE cart 
-        //     SET quantity = quantity + :quantity
-        //     WHERE user_id = :userId AND product_id = :productId
-        // ");
-
-        //     $stmt->execute([
-        //         ':quantity' => $quantity,
-        //         ':userId' => $userId,
-        //         ':productId' => $productId
-        //     ]);
-        return 'exists';
+            return 'exists';
         } else {
             $stmt = $this->db->prepare("
             INSERT INTO cart (user_id, product_id, quantity)

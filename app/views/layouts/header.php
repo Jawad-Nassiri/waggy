@@ -64,7 +64,7 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
                     <div class="user-data" id="user-data">
                         <span class="username"><?= $_SESSION['user']['name'] ?></span>
                         <a href="/waggy/auth/logout" class="logout">Logout</a>
-                        <span class="username"></span>
+                        <!-- <span class="username"></span> -->
                     </div>
                 <?php else: ?>
                     <a href="/waggy/auth/login" class="user" id="user-icon">
@@ -74,7 +74,7 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
 
 
                 <div class="cart-wrap">
-                    <a href="#" class="cart-icon">
+                    <a href="/waggy/cart" class="cart-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                     <?php if ($cartCount !== 0): ?>

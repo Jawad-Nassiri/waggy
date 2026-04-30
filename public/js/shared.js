@@ -25,7 +25,9 @@ const addToCart = async (event, quantity = 1) => {
     let { status, message, productCount } = data;
 
     if (status.toLowerCase() === "success") {
-        showToast(status.toLowerCase(), status, message, 3000);
+        if (!document.querySelector('.toast')) {
+            showToast(status.toLowerCase(), status, message, 3000);
+        }
         const cartWrap = document.querySelector('.cart-wrap');
         let cartCount = document.querySelector('.cart-count');
 
@@ -35,7 +37,9 @@ const addToCart = async (event, quantity = 1) => {
         }
         cartCount.textContent = data.cartCount;
     } else if (status.toLowerCase() === "warning") {
-        showToast(status.toLowerCase(), status, message, 3000);
+        if (!document.querySelector('.toast')) {
+            showToast(status.toLowerCase(), status, message, 3000);
+        }
     } else {
         showToast(status.toLowerCase(), status, message, 2000);
         setTimeout(() => { location.pathname = '/waggy/auth/login' }, 2000);
