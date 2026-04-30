@@ -53,8 +53,8 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
             <ul class="nav-links">
                 <li><a href="/waggy/home">Home</a></li>
                 <li><a href="/waggy/shop">Shop</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/waggy/blog">Blog</a></li>
+                <li><a href="/waggy/faq">FAQ</a></li>
             </ul>
             <div class="nav-icons">
                 <?php if (isset($_SESSION['user'])): ?>
