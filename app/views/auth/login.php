@@ -48,6 +48,17 @@ require_once __DIR__ . '/../layouts/header.php';
 
 </div>
 
+<!-- gallery start  -->
+<section class="gallery">
+    <img src="/waggy/public/images/gallery/gallery1.jpg" alt="">
+    <img src="/waggy/public/images/gallery/gallery2.jpg" alt="">
+    <img src="/waggy/public/images/gallery/gallery3.jpg" alt="">
+    <img src="/waggy/public/images/gallery/gallery4.jpg" alt="">
+    <img src="/waggy/public/images/gallery/gallery5.jpg" alt="">
+    <img src="/waggy/public/images/gallery/gallery6.jpg" alt="">
+</section>
+<!-- gallery finish  -->
+
 <!-- get toast box data  -->
 <?php if (isset($_SESSION['toast'])): ?>
     <script>

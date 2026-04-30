@@ -1,9 +1,10 @@
 @import "banner.css";
+@import "gallery.css";
 /* Auth Pages */
 
 .auth-container {
   max-width: 1300px;
-  margin: 60px auto;
+  margin: 60px auto 100px auto;
   padding: 0 30px;
 }
 
