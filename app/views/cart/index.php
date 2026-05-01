@@ -24,7 +24,6 @@ foreach ($products as $product) {
 <!-- banner finish  -->
 
 <div class="cart-container">
-    <!-- Cart Items -->
     <div class="cart-items">
         <div class="header">
             <div>PRODUCT</div>
@@ -55,7 +54,7 @@ foreach ($products as $product) {
                         <button class="quantity-btn plus">+</button>
                     </div>
                     <div class="subtotal" data-price="<?= $product['price'] ?>"><?= number_format($product['price'] * $product['quantity'], 2) ?></div>
-                    <button class="delete-btn">🗑</button>
+                    <button class="delete-btn" data-id="<?= $product['id'] ?>">🗑</button>
                 </div>
             <?php endforeach ?>
         <?php endif; ?>
