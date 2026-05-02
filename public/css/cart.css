@@ -140,6 +140,7 @@
 }
 
 .proceed-btn {
+    display: block;
     background: #e6a55c;
     color: white;
     border: none;
@@ -152,6 +153,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: all 0.2s ease-in;
+    text-align: center
 }
 
 .proceed-btn:hover {

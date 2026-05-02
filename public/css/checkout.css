@@ -1,0 +1,96 @@
+@import "banner.css";
+@import "gallery.css";
+
+.checkout-container {
+    display: flex;
+    gap: 40px;
+    padding: 60px 100px;
+}
+
+.billing-details,
+.order-summary {
+    flex: 1;
+}
+
+.billing-details h2,
+.order-summary h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: 200;
+    color: #41403E;
+    margin-left: 5px;
+}
+
+.form-group label span {
+    color: red;
+    font-size: 18px;
+}
+
+.form-group input {
+    padding: 20px 15px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.form-group input:focus {
+  border-color: #e4a400;
+  border-width: 2px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.form-group.cart-detail {
+    margin-top: 20px;
+}
+
+#card-element {
+    padding: 20px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#card-errors {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+#place-order-btn {
+    width: 100%;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+#place-order-btn:hover {
+    background-color: #000;
+}

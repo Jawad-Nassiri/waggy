@@ -53,7 +53,7 @@ foreach ($products as $product) {
                         <input type="text" class="quantity-input" id="quantity-input" value="<?= $product['quantity'] ?>" readonly>
                         <button class="quantity-btn plus">+</button>
                     </div>
-                    <div class="subtotal" data-price="<?= $product['price'] ?>"><?= number_format($product['price'] * $product['quantity'], 2) ?></div>
+                    <div class="subtotal" data-price="<?= $product['price'] ?>">$<?= number_format($product['price'] * $product['quantity'], 2) ?></div>
                     <button class="delete-btn" data-id="<?= $product['id'] ?>">🗑</button>
                 </div>
             <?php endforeach ?>
@@ -79,7 +79,7 @@ foreach ($products as $product) {
                 <a href="/waggy/shop" class="continue-shopping">Continue To Shop</a>
             </button>
             <?php if (count($products) > 0): ?>
-                <button class="proceed-btn">PROCEED TO CHECKOUT</button>
+                <a href="/waggy/cart/checkout" class="proceed-btn">PROCEED TO CHECKOUT</a>
             <?php endif; ?>
         </div>
     </div>
