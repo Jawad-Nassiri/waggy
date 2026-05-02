@@ -91,4 +91,5 @@ require_once __DIR__ . '/../layouts/header.php';
 
 
 <script src="https://js.stripe.com/v3/"></script>
+<script>const stripeKey = '<?= STRIPE_PUBLIC_KEY ?>';</script>
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
