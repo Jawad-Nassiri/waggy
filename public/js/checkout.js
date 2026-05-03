@@ -68,6 +68,6 @@ document.querySelector('#place-order-btn').addEventListener('click', async () =>
         if (!document.querySelector('.toast')) {
             showToast('success', 'Success', 'Payment successfully !', 3000);
         }
-        setTimeout(() => {location.href = '/waggy/home';}, 3000)
+        setTimeout(() => { location.href = '/waggy/cart/success'; }, 3000);
     }
 });

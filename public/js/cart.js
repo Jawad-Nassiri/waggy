@@ -4,7 +4,7 @@ const cartItemsContainer = doc.querySelector('.cart-items');
 
 
 // calculate products price
-const calculatePrice = (e) => {
+const calculatePrice = async (e) => {
     const minusBtn = e.target.closest('.minus');
     const plusBtn = e.target.closest('.plus');
     const control = e.target.closest('.quantity-control')
@@ -20,6 +20,7 @@ const calculatePrice = (e) => {
     if (!input || !subtotal) return;
 
     let quantity = Number(input.value);
+    let productId = control.dataset.id;
     let price = Number(subtotal.dataset.price);
 
     if (minusBtn) {
@@ -32,15 +33,41 @@ const calculatePrice = (e) => {
     }
 
     input.value = quantity;
-    subtotal.textContent = (quantity * price).toFixed(2);
+    subtotal.textContent = `$${(quantity * price).toFixed(2)}`;
 
     let fullPrice = 0;
     subtotals.forEach(subtotal => {
         fullPrice += Number(subtotal.textContent);
     })
 
-    subtotalPrice.textContent = '$' + fullPrice.toFixed(2)
-    totalPrice.textContent = '$' + fullPrice.toFixed(2)
+    subtotalPrice.textContent = '$' + fullPrice.toFixed(2);
+    totalPrice.textContent = '$' + fullPrice.toFixed(2);
+
+    // updata cart 
+    if (minusBtn || plusBtn) {
+
+        let res = await fetch('/waggy/cart/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity, productId })
+        });
+
+        if (!res.ok) {
+            console.error('Request failed');
+            return;
+        }
+
+        let data = await res.json();
+        if (data.status.toLowerCase() === 'success') {
+            if (!document.querySelector('.toast')) {
+                showToast('success', 'Success', 'Cart updated successfully', 2000);
+            }
+        }
+    }
+
+
 }
 
 // delete product 

@@ -1,26 +1,33 @@
 <?php
 
 namespace App\Controllers;
+
 require_once 'C:\\xampp\\htdocs\\waggy\\stripe-php\\init.php';
 require_once 'C:\\xampp\\htdocs\\waggy\\config\\stripe.php';
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 use Core\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 
 class CartController extends Controller
 {
+    private $userId;
+
+    public function __construct()
+    {
+        $this->userId = $_SESSION['user']['id'] ?? null;
+    }
 
     public function index()
     {
-        $userId = $_SESSION['user']['id'] ?? null;
 
-        if (!$userId) {
+        if (!$this->userId) {
             header("Location: /waggy/auth/login");
             exit;
         }
 
         $cart = new Cart();
-        $products = $cart->getCartItems($userId);
+        $products = $cart->getCartItems($this->userId);
 
         $this->view('cart/index', ['products' => $products]);
 
@@ -31,9 +38,7 @@ class CartController extends Controller
         header('Content-Type: application/json');
         $body = json_decode(file_get_contents("php://input"), true);
 
-        $userId = $_SESSION['user']['id'] ?? null;
-
-        if (!$userId) {
+        if (!$this->userId) {
             echo json_encode(['status' => 'Error', 'message' => 'Not logged in']);
             exit;
         }
@@ -43,7 +48,7 @@ class CartController extends Controller
         $quantity = (int) ($body['quantity'] ?? 1);
 
         if ($productId && $quantity) {
-            $res = $cart->addToCart($userId, $productId, $quantity);
+            $res = $cart->addToCart($this->userId, $productId, $quantity);
             if ($res === 'exists') {
                 echo json_encode(['status' => 'Warning', 'message' => 'Product is already in the cart']);
                 exit;
@@ -61,17 +66,15 @@ class CartController extends Controller
         echo json_encode(['status' => 'Error', 'message' => 'Invalid data']);
         exit;
     }
-
     public function delete()
     {
         header('Content-Type: application/json');
 
         $body = json_decode(file_get_contents("php://input"), true);
 
-        $userId = $_SESSION['user']['id'] ?? null;
         $productId = $body['productId'] ?? null;
 
-        if (!$userId) {
+        if (!$this->userId) {
             echo json_encode([
                 'status' => 'Error',
                 'message' => 'Not logged in'
@@ -88,7 +91,7 @@ class CartController extends Controller
         }
 
         $cart = new Cart();
-        $res = $cart->removeItem($userId, $productId);
+        $res = $cart->removeItem($this->userId, $productId);
 
         if ($res) {
             if (!isset($_SESSION['cartCount'])) {
@@ -111,17 +114,40 @@ class CartController extends Controller
 
         exit;
     }
+    public function update()
+    {
+        header('Content-Type: application/json');
+
+        if (!$this->userId) {
+            echo json_encode(['status' => 'Error', 'message' => 'Not logged in']);
+            exit;
+        }
+
+        $body = json_decode(file_get_contents("php://input"), true);
+        $productId = $body['productId'] ?? null;
+        $quantity = $body['quantity'] ?? null;
+
+        if (!$productId || !$quantity) {
+            echo json_encode(['status' => 'Error', 'message' => 'Invalid data']);
+            exit;
+        }
+
+        $cart = new Cart();
+        $cart->updateQuantity($this->userId, $productId, $quantity);
+
+        echo json_encode(['status' => 'Success']);
+        exit;
+    }
     public function checkout()
     {
-        $userId = $_SESSION['user']['id'] ?? null;
 
-        if (!$userId) {
+        if (!$this->userId) {
             header("Location: /waggy/auth/login");
             exit;
         }
 
         $cart = new Cart();
-        $products = $cart->getCartItems($userId);
+        $products = $cart->getCartItems($this->userId);
 
         if (count($products) === 0) {
             header("Location: /waggy/shop");
@@ -138,14 +164,11 @@ class CartController extends Controller
             'totalPrice' => $totalPrice
         ]);
     }
-
     public function payment()
     {
         header('Content-Type: application/json');
 
-        $userId = $_SESSION['user']['id'] ?? null;
-
-        if (!$userId) {
+        if (!$this->userId) {
             echo json_encode(['error' => 'Not logged in']);
             exit;
         }
@@ -153,7 +176,7 @@ class CartController extends Controller
         $body = json_decode(file_get_contents("php://input"), true);
 
         $cart = new Cart();
-        $products = $cart->getCartItems($userId);
+        $products = $cart->getCartItems($this->userId);
 
         if (count($products) === 0) {
             echo json_encode(['error' => 'Cart is empty']);
@@ -165,13 +188,12 @@ class CartController extends Controller
             $total += $product['price'] * $product['quantity'];
         }
 
-        \Stripe\Stripe::setApiKey('STRIPE_SECRET_KEY');
 
         $paymentIntent = \Stripe\PaymentIntent::create([
             'amount' => (int) ($total * 100),
             'currency' => 'eur',
             'metadata' => [
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'name' => $body['firstName'] . ' ' . $body['lastName'],
                 'email' => $body['email']
             ]
@@ -180,7 +202,44 @@ class CartController extends Controller
         echo json_encode(['clientSecret' => $paymentIntent->client_secret]);
         exit;
     }
+    public function webhook()
+    {
+        $payload = file_get_contents('php://input');
+        $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? '';
 
+        try {
+            $event = \Stripe\Webhook::constructEvent(
+                $payload,
+                $sigHeader,
+                STRIPE_WEBHOOK_SECRET
+            );
+        } catch (\Exception $e) {
+            http_response_code(400);
+            echo json_encode(['error' => $e->getMessage()]);
+            exit;
+        }
 
+        if ($event->type === 'payment_intent.succeeded') {
+            $paymentIntent = $event->data->object;
+            $userId = $paymentIntent->metadata->user_id;
+            $total = $paymentIntent->amount / 100;
+
+            $cart = new Cart();
+            $products = $cart->getCartItems($userId);
+
+            $order = new Order();
+            $orderId = $order->createOrder($userId, $total);
+
+            foreach ($products as $product) {
+                $order->createOrderItems($orderId, $product['id'], $product['quantity'], $product['price']);
+            }
+
+            $cart->clearCart($userId);
+            $_SESSION['cartCount'] = 0;
+        }
+
+        http_response_code(200);
+        exit;
+    }
 
 }

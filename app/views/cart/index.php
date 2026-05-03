@@ -37,7 +37,6 @@ foreach ($products as $product) {
                     Your cart is empty <i class="fa-regular fa-face-frown"></i>
                 </h1>
             </div>
-
         <?php else : ?>
 
             <?php foreach ($products as $product) : ?>
@@ -48,7 +47,7 @@ foreach ($products as $product) {
                         </div>
                         <div class="product-name"><?= $product['name'] ?></div>
                     </div>
-                    <div class="quantity-control">
+                    <div class="quantity-control" data-id="<?= $product['id'] ?>">
                         <button class="quantity-btn minus">-</button>
                         <input type="text" class="quantity-input" id="quantity-input" value="<?= $product['quantity'] ?>" readonly>
                         <button class="quantity-btn plus">+</button>
