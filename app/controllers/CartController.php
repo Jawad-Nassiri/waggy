@@ -2,9 +2,13 @@
 
 namespace App\Controllers;
 
+// This loads the Stripe PHP library. Without this, PHP doesn't know what Stripe is it's like importing a tool before using it.
 require_once 'C:\\xampp\\htdocs\\waggy\\stripe-php\\init.php';
+// this loads config file where keys are defined
 require_once 'C:\\xampp\\htdocs\\waggy\\config\\stripe.php';
+// This tells the Stripe library "use this secret key for all requests
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+
 use Core\Controller;
 use App\Models\Cart;
 use App\Models\Order;
@@ -17,7 +21,6 @@ class CartController extends Controller
     {
         $this->userId = $_SESSION['user']['id'] ?? null;
     }
-
     public function index()
     {
 
@@ -32,7 +35,6 @@ class CartController extends Controller
         $this->view('cart/index', ['products' => $products]);
 
     }
-
     public function add()
     {
         header('Content-Type: application/json');
@@ -160,7 +162,6 @@ class CartController extends Controller
         }
 
         $this->view('cart/checkout', [
-            'products' => $products,
             'totalPrice' => $totalPrice
         ]);
     }
@@ -189,9 +190,11 @@ class CartController extends Controller
         }
 
 
+        // This sends a request to Stripe's servers saying I want to create a payment
+        // Stripe responds with a payment object that contains everything needed to process the transaction.
         $paymentIntent = \Stripe\PaymentIntent::create([
-            'amount' => (int) ($total * 100),
-            'currency' => 'eur',
+            'amount' => (int) ($total * 100), //Stripe works in cents
+            'currency' => 'usd',
             'metadata' => [
                 'user_id' => $this->userId,
                 'name' => $body['firstName'] . ' ' . $body['lastName'],
@@ -199,6 +202,8 @@ class CartController extends Controller
             ]
         ]);
 
+        $_SESSION['cartCount'] = 0;
+        $_SESSION['order_success'] = true;
         echo json_encode(['clientSecret' => $paymentIntent->client_secret]);
         exit;
     }
@@ -235,11 +240,35 @@ class CartController extends Controller
             }
 
             $cart->clearCart($userId);
-            $_SESSION['cartCount'] = 0;
+            // $_SESSION['cartCount'] = 0;
         }
 
         http_response_code(200);
         exit;
+    }
+
+    public function success()
+    {
+        if (!isset($_SESSION['order_success'])) {
+            header("Location: /waggy/shop");
+            exit;
+        }
+        unset($_SESSION['order_success']);
+
+        if (!$this->userId) {
+            header("Location: /waggy/auth/login");
+            exit;
+        }
+
+        $order = new Order();
+        $lastOrder = $order->getLastOrder($this->userId);
+        $orderItems = $order->getOrderItems($lastOrder['id']);
+
+        $this->view('cart/success', [
+            'order' => $lastOrder,
+            'orderItems' => $orderItems,
+            'username' => $_SESSION['user']['name']
+        ]);
     }
 
 }

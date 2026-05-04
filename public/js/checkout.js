@@ -2,6 +2,7 @@ const stripe = Stripe(stripeKey);
 const elements = stripe.elements();
 
 const cardElement = elements.create('card', {
+    hidePostalCode: true,
     style: {
         base: {
             fontSize: '16px',
@@ -54,7 +55,7 @@ document.querySelector('#place-order-btn').addEventListener('click', async () =>
             billing_details: {
                 name: firstName + ' ' + lastName,
                 email: email,
-                address: { line1: address, city: city, postal_code: zip }
+                address: { line1: address, city: city }
             }
         }
     });
@@ -68,6 +69,8 @@ document.querySelector('#place-order-btn').addEventListener('click', async () =>
         if (!document.querySelector('.toast')) {
             showToast('success', 'Success', 'Payment successfully !', 3000);
         }
+        const cartCountEl = document.querySelector('.cart-count');
+        if (cartCountEl) cartCountEl.remove();
         setTimeout(() => { location.href = '/waggy/cart/success'; }, 3000);
     }
 });

@@ -37,8 +37,8 @@ const calculatePrice = async (e) => {
 
     let fullPrice = 0;
     subtotals.forEach(subtotal => {
-        fullPrice += Number(subtotal.textContent);
-    })
+        fullPrice += Number(subtotal.textContent.replace('$', ''));
+    });
 
     subtotalPrice.textContent = '$' + fullPrice.toFixed(2);
     totalPrice.textContent = '$' + fullPrice.toFixed(2);
@@ -144,7 +144,6 @@ const deleteProduct = async (e) => {
         setTimeout(() => { location.pathname = '/waggy/auth/login' }, 3000);
     }
 };
-
 
 // handle methods 
 cartItemsContainer.addEventListener('click', (e) => {

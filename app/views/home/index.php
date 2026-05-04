@@ -17,7 +17,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
             <div class="slide-content">
                 <h1>Best Destination For</h1>
-                <a href="#" class="btn-shop">SHOP NOW →</a>
+                <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
             </div>
         </div>
 
@@ -27,7 +27,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
             <div class="slide-content">
                 <h1>Best Destination For</h1>
-                <a href="#" class="btn-shop">SHOP NOW →</a>
+                <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
             </div>
         </div>
 
@@ -37,7 +37,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
             <div class="slide-content">
                 <h1>Best Destination For</h1>
-                <a href="#" class="btn-shop">SHOP NOW →</a>
+                <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
             </div>
         </div>
 
@@ -98,7 +98,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <section class="products-section hoodie">
     <div class="products-header">
         <h2>Pet Clothing</h2>
-        <a href="#" class="btn-shop">SHOP NOW →</a>
+        <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
     </div>
 
     <div class="products-slider-wrapper" id="products-container">
@@ -140,7 +140,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <section class="products-section food">
     <div class="products-header food">
         <h2>Pet Foodies</h2>
-        <a href="#" class="btn-shop">SHOP NOW →</a>
+        <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
     </div>
 
     <div class="food-grid product-container">
@@ -176,7 +176,7 @@ require_once __DIR__ . '/../layouts/header.php';
     <div class="sale-content">
         <span>UPTO 40% OFF</span>
         <h2>Clearance<br>Sale !!!</h2>
-        <a href="#" class="btn-shop">SHOP NOW →</a>
+        <a href="/waggy/shop" class="btn-shop">SHOP NOW →</a>
     </div>
     <div class="sale-image">
         <img src="/waggy/public/images/banner/banner-img4.png" alt="Sale">
@@ -188,7 +188,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <section class="blog-section">
     <div class="blog-header">
         <h2>Latest Blog Post</h2>
-        <a href="#" class="btn-shop">READ ALL →</a>
+        <a href="/waggy/blog" class="btn-shop">READ ALL →</a>
     </div>
 
     <div class="blog-grid">

@@ -11,7 +11,28 @@
 .cart-items {
     background: #fff;
     padding: 30px;
+    max-height: 450px;
+    overflow-y: scroll;
 }
+
+.cart-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cart-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cart-items::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.cart-items::-webkit-scrollbar-track-piece {
+    margin: 65px 0;
+}
+
 
 .header {
     display: grid;
