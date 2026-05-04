@@ -29,12 +29,17 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
             <div class="logo">
                 <img src="/waggy/public/images/logo.png" alt="Logo">
             </div>
-            <div class="search-bar">
+            <!-- <div class="search-bar">
                 <input
                     type="text"
                     placeholder="Search For More Than 10,000 Products" />
                 <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+            </div> -->
+            <div class="header-badge">
+    <i class="fa-solid fa-bolt"></i>
+    <span>Fast delivery • Easy returns</span>
+</div>
+
             <div class="header-contact">
                 <div>
                     <span>Phone</span>
