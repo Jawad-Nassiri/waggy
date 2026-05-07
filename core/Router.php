@@ -9,11 +9,17 @@ class Router
         $url = $_GET['url'] ?? 'home';
         $url = explode('/', trim($url, '/'));
 
-        $controllerName = ucfirst($url[0] ?? 'home') . 'Controller';
-        $method = strtolower($url[1] ?? 'index');
-        $param = $url[2] ?? null;
-
-        $class = "\\App\\Controllers\\$controllerName";
+        if ($url[0] === 'admin') {
+            $controllerName = ucfirst($url[1] ?? 'dashboard') . 'Controller';
+            $method = strtolower($url[2] ?? 'index');
+            $param = $url[3] ?? null;
+            $class = "\\Admin\\Controllers\\$controllerName";
+        } else {
+            $controllerName = ucfirst($url[0] ?? 'home') . 'Controller';
+            $method = strtolower($url[1] ?? 'index');
+            $param = $url[2] ?? null;
+            $class = "\\App\\Controllers\\$controllerName";
+        }
 
         if (!class_exists($class)) {
             die("Controller not found");

@@ -5,6 +5,7 @@
     color: #dead6f;
     margin-left: 2px;
     font-family: 'Chilanka', cursive;
+
 }
 
 .faq-container {
@@ -29,7 +30,8 @@
     font-size: 18px;
     color: #666;
     margin: 0 auto;
-    line-height: 25px;;
+    line-height: 25px;
+    ;
 }
 
 .faq-item {

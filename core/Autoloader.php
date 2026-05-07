@@ -10,6 +10,7 @@ spl_autoload_register(function($class) {
         '',
         'app/',
         'core/',
+        'admin/'
     ];
 
     foreach ($locations as $location) {

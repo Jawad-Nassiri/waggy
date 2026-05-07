@@ -13,13 +13,13 @@ eyeIcons.forEach(eye => {
 });
 
 
-// sign up error handling
 const authForm = doc.querySelector('#auth-form');
 const errorNameElem = doc.querySelector('.form-error.name');
 const errorEmailElem = doc.querySelector('.form-error.email');
 const errorPasswordElem = doc.querySelector('.form-error.password');
 const errorConfirmPasswordElem = doc.querySelector('.form-error.confirm-password');
 const loginForm = doc.querySelector('#login-form');
+const adminLoginForm = doc.querySelector('#admin-login');
 
 // show error\success messages 
 const showMessage = (input, errElem, message, color) => {
@@ -172,10 +172,56 @@ if (loginForm) {
         }
 
     });
-    
+
     // submit login form is not error detected
     loginForm.addEventListener('submit', (e) => {
+        if (!validateLoginForm()) {
+            e.preventDefault();
+            if (!document.querySelector('.toast')) {
+                showToast('error', 'Error', 'Please fill all fields!', 2000);
+            }
+            return;
+        }
+    })
+}
 
+
+// handle admin form 
+if (adminLoginForm) {
+    adminLoginForm.addEventListener('input', (e) => {
+        let input = event.target.closest('input');
+        if (!input) return;
+
+        let id = input.id;
+        let value = input.value;
+
+        if (id === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (value.trim() === "") {
+                clearMessage(input, errorEmailElem);
+            } else if (!emailRegex.test(value)) {
+                showMessage(input, errorEmailElem, "Invalid email address", "#e74c3c");
+            } else {
+                showMessage(input, errorEmailElem, "Email is valid", "#28a745");
+            }
+        }
+
+        if (id === "password") {
+
+            if (value.trim() === "") {
+                clearMessage(input, errorPasswordElem);
+            } else if (value.trim().length < 6) {
+                showMessage(input, errorPasswordElem, "Password must be at least 6 characters", "#e74c3c");
+            } else {
+                showMessage(input, errorPasswordElem, "Password is valid", "#28a745");
+            }
+        }
+
+    })
+
+
+    adminLoginForm.addEventListener('submit', (e) => {
         if (!validateLoginForm()) {
             e.preventDefault();
             if (!document.querySelector('.toast')) {

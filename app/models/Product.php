@@ -7,7 +7,6 @@ use PDO;
 
 class Product extends Model
 {
-
     public function countAll()
     {
         $stmt = $this->db->prepare('SELECT COUNT(*) FROM products');
@@ -90,12 +89,21 @@ class Product extends Model
         return $stmt->fetchColumn();
     }
 
-    public function getProductById($id) {
+    public function getProductById($id)
+    {
         $stmt = $this->db->prepare('SELECT * FROM products WHERE id = :id');
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function getLatestProducts($limit = 6)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM products ORDER BY id DESC LIMIT :limit');
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

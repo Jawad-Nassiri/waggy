@@ -11,9 +11,7 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
     <title>My Shop</title>
     <link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="/waggy/public/css/main.css" />
 
     <?php if (isset($pageStyles)): ?>
@@ -29,16 +27,10 @@ $cartCount = $_SESSION['cartCount'] ?? 0;
             <div class="logo">
                 <img src="/waggy/public/images/logo.png" alt="Logo">
             </div>
-            <!-- <div class="search-bar">
-                <input
-                    type="text"
-                    placeholder="Search For More Than 10,000 Products" />
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div> -->
             <div class="header-badge">
-    <i class="fa-solid fa-bolt"></i>
-    <span>Fast delivery • Easy returns</span>
-</div>
+                <i class="fa-solid fa-bolt"></i>
+                <span>Fast delivery • Easy returns</span>
+            </div>
 
             <div class="header-contact">
                 <div>

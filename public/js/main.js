@@ -1,3 +1,5 @@
+console.log('main js file')
+
 const userIcon = document.querySelector('#user-icon');
 const userData = document.querySelector('#user-data');
 const navLinks = document.querySelectorAll('.nav-links li a')
