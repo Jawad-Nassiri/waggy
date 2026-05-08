@@ -66,7 +66,6 @@ class Product extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function countFiltered($categoryId = null, $minPrice = null, $maxPrice = null)
     {
         $sql = "SELECT COUNT(*) FROM products WHERE 1=1";

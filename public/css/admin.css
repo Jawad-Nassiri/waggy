@@ -1,14 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
 
-body {
-    background: #f5f5f0;
-    color: #222;
-}
 
 .admin-wrap {
     display: flex;
@@ -16,71 +6,82 @@ body {
 }
 
 /* Sidebar */
+
+
 .sidebar {
     width: 240px;
-    background: #1a1a1a;
+    background: linear-gradient(180deg,
+        #cfc7b6 0%,
+        #e8e3d2 40%,
+        #dbdad6 100%
+    );
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
     position: fixed;
     height: 100vh;
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
 }
 
+/* Logo */
 .sidebar-logo h2 {
-    color: #fff;
+    color: #2f2f2f;
     font-size: 24px;
     font-weight: 700;
 }
 
 .sidebar-logo span {
-    color: #888;
+    color: #5a5a5a;
     font-size: 13px;
 }
 
+/* Nav container */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     margin-top: 40px;
     flex: 1;
 }
 
+/* Nav items */
 .nav-item {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 12px 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
-    color: #888;
+    color: #4a4a4a;
     font-size: 15px;
-    transition: 0.2s;
-}
-
-.nav-item:hover,
-.nav-item.active {
-    background: #2a2a2a;
-    color: #fff;
+    transition: 0.2s ease;
 }
 
 .nav-item i {
     width: 18px;
 }
 
+.nav-item:hover,
+.nav-item.active {
+    background: rgba(0, 0, 0, 0.06);
+    color: #2f2f2f;
+}
+
+/* Logout */
 .sidebar-logout {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 12px 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
-    color: #e63946;
+    color: #b23a3a;
     font-size: 15px;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .sidebar-logout:hover {
-    background: #2a2a2a;
+    background: rgba(0, 0, 0, 0.06);
 }
 
 /* Main */
@@ -90,10 +91,23 @@ body {
     flex: 1;
 }
 
+.admin-top {
+    background: linear-gradient(90deg,
+        #d6d0c2 0%,
+        #e8e3d2 50%,
+        #dbdad6 100%
+    );
+    padding: 20px 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+
+/* Title */
 .admin-top h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 30px;
+    color: #2f2f2f;
+    font-size: 26px;
+    font-weight: 600;
 }
 
 /* Stats */

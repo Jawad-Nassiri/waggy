@@ -7,6 +7,13 @@ use PDO;
 
 class User extends Model
 {
+
+    public function getUsers() {
+        $stmt = $this->db->prepare('SELECT * FROM users');
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function register($name, $email, $password, $confirmPassword)
     {
 
