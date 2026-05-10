@@ -1,6 +1,7 @@
 <?php
 
 $pageStyles = 'users';
+$pageScripts = 'users';
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
@@ -65,7 +66,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <div class="actions">
                 <button class="edit-btn">Edit</button>
 
-                <button class="delete-btn">
+                <button class="delete-btn" data-id=<?= $user['id'] ?>>
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -74,3 +75,7 @@ require_once __DIR__ . '/../layouts/header.php';
     <?php endforeach; ?>
 
 </div>
+
+<?php
+require_once __DIR__ . '/../layouts/footer.php';
+?>

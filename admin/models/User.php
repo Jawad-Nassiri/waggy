@@ -35,4 +35,11 @@ class User extends Model
         $stmt->execute();
         return $stmt->fetchColumn();
     }
+    public function deleteUser($id)
+    {
+        $stmt = $this->db->prepare('DELETE FROM users WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+
+        return $stmt->rowCount() > 0;
+    }
 }
