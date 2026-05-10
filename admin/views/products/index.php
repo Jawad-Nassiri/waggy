@@ -1,6 +1,6 @@
 <?php
 
-$pageStyles = 'users';
+$pageStyles = 'products';
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
@@ -16,7 +16,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <span>Dashboard</span>
         </a>
 
-        <a href="/waggy/admin/products" class="nav-item">
+        <a href="/waggy/admin/products" class="nav-item active">
             <i class="fa-solid fa-box"></i>
             <span>Products</span>
         </a>
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <span>Orders</span>
         </a>
 
-        <a href="/waggy/admin/users" class="nav-item active">
+        <a href="/waggy/admin/users" class="nav-item">
             <i class="fa-solid fa-users"></i>
             <span>Users</span>
         </a>
@@ -38,29 +38,37 @@ require_once __DIR__ . '/../layouts/header.php';
     </a>
 </aside>
 
-<div class="users-table">
+<div class="products-table">
 
     <div class="table-header">
         <span>ID</span>
+        <span>Image</span>
         <span>Name</span>
-        <span>Email</span>
-        <span>Role</span>
+        <span>Description</span>
+        <span>Price</span>
+        <span>Stock</span>
         <span>Created At</span>
         <span>Actions</span>
     </div>
 
-    <?php foreach ($users as $user): ?>
+    <?php foreach ($products as $product): ?>
         <div class="table-row">
 
-            <span><?= $user['id']; ?></span>
+            <span><?= $product['id']; ?></span>
 
-            <span><?= htmlspecialchars($user['name']); ?></span>
+            <span>
+                <img src="/waggy/public/images/<?= $product['image']; ?>" alt="<?= htmlspecialchars($product['name']); ?>">
+            </span>
 
-            <span><?= htmlspecialchars($user['email']); ?></span>
+            <span><?= htmlspecialchars($product['name']); ?></span>
 
-            <span><?= htmlspecialchars($user['role']); ?></span>
+            <span class="description"><?= htmlspecialchars($product['description']); ?></span>
 
-            <span><?= date('d/m/Y', strtotime($user['created_at'])); ?></span>
+            <span>$<?= number_format($product['price'], 2); ?></span>
+
+            <span><?= $product['stock']; ?></span>
+
+            <span><?= date('d/m/Y', strtotime($product['created_at'])); ?></span>
 
             <div class="actions">
                 <button class="edit-btn">Edit</button>

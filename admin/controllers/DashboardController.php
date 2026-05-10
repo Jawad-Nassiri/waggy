@@ -3,9 +3,9 @@
 namespace Admin\Controllers;
 
 use Admin\Controllers\BaseController;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Order;
+use Admin\Models\Product;
+use Admin\Models\User;
+use Admin\Models\Order;
 
 
 class DashboardController extends BaseController

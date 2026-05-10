@@ -6,6 +6,13 @@ use PDO;
 
 class Order extends Model
 {
+    public function getAllOrders()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM orders');
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function createOrder($userId, $total)
     {
         $stmt = $this->db->prepare('INSERT INTO orders (user_id, total) VALUES (:userId, :total)');
@@ -49,24 +56,6 @@ class Order extends Model
         ]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function countAll()
-    {
-        $stmt = $this->db->prepare('SELECT COUNT(*) from orders');
-        $stmt->execute();
-
-        return $stmt->fetchColumn();
-    }
-
-    public function totalRevenue()
-    {
-        $stmt = $this->db->prepare('SELECT SUM(total) AS total FROM orders');
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['total'];
     }
 
 }

@@ -50,12 +50,12 @@ require_once __DIR__ . '/../layouts/header.php';
             <div class="stat-card users">
                 <span class="stat-value"><?= $totalUsers ?></span>
                 <span class="stat-label">Total Users</span>
-                <button class="view-all users">View All</button>
+                <a href="/waggy/admin/users" class="view-all users">View All</a>
             </div>
             <div class="stat-card products">
                 <span class="stat-value"><?= $totalProducts ?></span>
                 <span class="stat-label">Total Products</span>
-                <button class="view-all products">View All</button>
+                <a href="/waggy/admin/products" class="view-all products">View All</a>
             </div>
             <div class="stat-card revenue">
                 <span class="stat-value">$<?= number_format($totalRevenue, 2) ?></span>

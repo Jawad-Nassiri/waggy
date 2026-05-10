@@ -144,7 +144,7 @@
 }
 
 .view-all {
-    padding: 10px 15px;
+    padding: 15px;
     width: 150px;
     margin-top: 10px;
     background: #fff;
@@ -154,6 +154,9 @@
     outline: none;
     text-transform: uppercase;
     cursor: pointer;
+    color: #000;
+    display: block;
+    text-align: center;
 
     transition: all 0.3s ease;
 }

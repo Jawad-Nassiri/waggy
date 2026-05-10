@@ -3,7 +3,7 @@
 namespace Admin\Controllers;
 
 use Admin\Controllers\BaseController;
-use App\Models\User;
+use Admin\Models\User;
 
 
 class UsersController extends BaseController
@@ -13,7 +13,7 @@ class UsersController extends BaseController
         $userModel = new User();
         $users = $userModel->getUsers();
 
-        if (!$users) {
+        if (empty($users)) {
             return $this->view('users/index', ['error' => 'No users found !']);
         }
 

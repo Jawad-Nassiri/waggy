@@ -2,13 +2,13 @@
 
 namespace Admin\Controllers;
 
+use Admin\Controllers\BaseController;
 use App\Models\User;
 
 class AuthController extends BaseController
 {
     public function login()
     {
-
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             $email = trim($_POST['email']);
