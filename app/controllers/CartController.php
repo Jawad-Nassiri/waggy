@@ -240,7 +240,6 @@ class CartController extends Controller
             }
 
             $cart->clearCart($userId);
-            // $_SESSION['cartCount'] = 0;
         }
 
         http_response_code(200);

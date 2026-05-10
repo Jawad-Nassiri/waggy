@@ -6,13 +6,6 @@ use PDO;
 
 class Order extends Model
 {
-    public function getAllOrders()
-    {
-        $stmt = $this->db->prepare('SELECT * FROM orders');
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
     public function createOrder($userId, $total)
     {
         $stmt = $this->db->prepare('INSERT INTO orders (user_id, total) VALUES (:userId, :total)');
