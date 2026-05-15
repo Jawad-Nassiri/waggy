@@ -12,7 +12,6 @@ eyeIcons.forEach(eye => {
     })
 });
 
-
 const authForm = doc.querySelector('#auth-form');
 const errorNameElem = doc.querySelector('.form-error.name');
 const errorEmailElem = doc.querySelector('.form-error.email');
@@ -21,18 +20,18 @@ const errorConfirmPasswordElem = doc.querySelector('.form-error.confirm-password
 const loginForm = doc.querySelector('#login-form');
 const adminLoginForm = doc.querySelector('#admin-login');
 
-// show error\success messages 
-const showMessage = (input, errElem, message, color) => {
-    input.style.borderColor = color;
-    errElem.style.color = color;
-    errElem.textContent = message;
-};
+// // show error\success messages 
+// showMessage = (input, errElem, message, color) => {
+//     input.style.borderColor = color;
+//     errElem.style.color = color;
+//     errElem.textContent = message;
+// };
 
-// clear message 
-const clearMessage = (input, errElem) => {
-    input.style.borderColor = "";
-    errElem.textContent = "";
-};
+// // clear message 
+// clearMessage = (input, errElem) => {
+//     input.style.borderColor = "";
+//     errElem.textContent = "";
+// };
 
 if (authForm) {
     // input fields validation 
@@ -184,7 +183,6 @@ if (loginForm) {
         }
     })
 }
-
 
 // handle admin form 
 if (adminLoginForm) {

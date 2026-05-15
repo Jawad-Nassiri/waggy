@@ -4,9 +4,33 @@ namespace Admin\Models;
 
 use Core\Model;
 use PDO;
+use App\Models\User as AppUser;
 
 class User extends Model
 {
+    public function addUser($name, $email, $password, $role)
+    {
+        $appUser = new AppUser();
+
+        if ($appUser->emailExists($email)) {
+            return false;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+
+        $stmt->execute(
+            [
+                $name,
+                $email,
+                $hashedPassword,
+                $role
+            ]
+        );
+
+        return $stmt->rowCount();
+    }
     public function getUsers()
     {
         $stmt = $this->db->prepare('SELECT * FROM users');
@@ -42,7 +66,6 @@ class User extends Model
 
         return $stmt->rowCount() > 0;
     }
-
     public function updateUser($id, $name, $email, $role)
     {
         $stmt = $this->db->prepare('UPDATE users SET name = :name, email = :email, role = :role

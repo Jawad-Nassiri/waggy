@@ -19,7 +19,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 <div class="auth-container">
 
-    <form action="/waggy/admin/edit/updateUser/<?= $user['id'] ?>" method="POST" class="auth-form">
+    <form action="/waggy/admin/users/updateUser/<?= $user['id'] ?>" method="POST" class="auth-form">
 
         <div class="auth-section-line"></div>
 

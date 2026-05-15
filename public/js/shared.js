@@ -45,3 +45,16 @@ const addToCart = async (event, quantity = 1) => {
         setTimeout(() => { location.pathname = '/waggy/auth/login' }, 2000);
     }
 }
+
+// show error\success messages 
+showMessage = (input, errElem, message, color) => {
+    input.style.borderColor = color;
+    errElem.style.color = color;
+    errElem.textContent = message;
+};
+
+// clear message 
+clearMessage = (input, errElem) => {
+    input.style.borderColor = "";
+    errElem.textContent = "";
+};

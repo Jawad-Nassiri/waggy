@@ -10,8 +10,9 @@ class User extends Model
     public function register($name, $email, $password, $confirmPassword)
     {
 
-        if ($this->emailExists($email))
+        if ($this->emailExists($email)) {
             return false;
+        }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $role = 'user';

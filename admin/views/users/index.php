@@ -31,6 +31,9 @@ require_once __DIR__ . '/../layouts/header.php';
             <i class="fa-solid fa-users"></i>
             <span>Users</span>
         </a>
+        <a href="/waggy/admin/users/addUser" class="add-user">
+            + Add User
+        </a>
     </nav>
 
     <a href="/waggy/admin/auth/logout" class="sidebar-logout">
@@ -64,7 +67,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <span><?= date('d/m/Y', strtotime($user['created_at'])); ?></span>
 
             <div class="actions">
-                <a href="/waggy/admin/edit/editUser/<?= $user['id'] ?>" class="edit-btn">Edit</a>
+                <a href="/waggy/admin/users/editUser/<?= $user['id'] ?>" class="edit-btn">Edit</a>
 
                 <button class="delete-btn" data-id=<?= $user['id'] ?>>
                     <i class="fa-solid fa-trash"></i>

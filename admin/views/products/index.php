@@ -20,6 +20,9 @@ require_once __DIR__ . '/../layouts/header.php';
             <i class="fa-solid fa-box"></i>
             <span>Products</span>
         </a>
+        <a href="/waggy/admin/products/addProduct" class="add-product">
+            + Add Product
+        </a>
 
         <a href="/waggy/admin/orders" class="nav-item">
             <i class="fa-solid fa-bag-shopping"></i>
