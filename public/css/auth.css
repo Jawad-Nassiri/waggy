@@ -53,6 +53,33 @@
   position: relative;
 }
 
+.select-box {
+  position: relative;
+  display: inline-block;
+}
+
+.select-box select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 22px 35px 22px 20px;
+  border: 1px solid rgba(65, 64, 62, 0.2);
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.select-box::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .form-group input {
   padding: 22px 0 22px 20px;
   background: #fff;
@@ -62,7 +89,6 @@
   font-size: 18px;
   border-radius: 5px;
   outline: none;
-
 }
 
 .form-group input::placeholder {

@@ -46,7 +46,6 @@ class User extends Model
 
         return $stmt->fetch();
     }
-
     public function login($email, $password)
     {
         $user = $this->findUserByEmail($email);

@@ -64,7 +64,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <span><?= date('d/m/Y', strtotime($user['created_at'])); ?></span>
 
             <div class="actions">
-                <button class="edit-btn">Edit</button>
+                <a href="/waggy/admin/edit/editUser/<?= $user['id'] ?>" class="edit-btn">Edit</a>
 
                 <button class="delete-btn" data-id=<?= $user['id'] ?>>
                     <i class="fa-solid fa-trash"></i>
@@ -75,6 +75,13 @@ require_once __DIR__ . '/../layouts/header.php';
     <?php endforeach; ?>
 
 </div>
+
+<?php if (isset($_SESSION['toast'])): ?>
+    <script>
+        window.toastData = <?= json_encode($_SESSION['toast']) ?>;
+    </script>
+    <?php unset($_SESSION['toast']); ?>
+<?php endif; ?>
 
 <?php
 require_once __DIR__ . '/../layouts/footer.php';

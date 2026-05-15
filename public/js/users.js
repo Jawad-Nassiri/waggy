@@ -34,3 +34,13 @@ const deleteUser = async (e) => {
     }
 
 }
+
+if (window.toastData) {
+
+    let { type, title, message } = window.toastData;
+
+    if (!document.querySelector('.toast')) {
+        showToast(type, title, message);
+    }
+
+}
